@@ -117,12 +117,12 @@ if __name__=='__main__':
         img_out, orig_faces, enhanced_faces = processer.process(img, aligned=args.aligned)
         
         img = cv2.resize(img, img_out.shape[:2][::-1])
-        cv2.imwrite(os.path.join(args.outdir, '.'.join(filename.split('.')[:-1])+f'_COMP{args.ext}'), np.hstack((img, img_out)))
+        
         cv2.imwrite(os.path.join(args.outdir, '.'.join(filename.split('.')[:-1])+f'_GPEN{args.ext}'), img_out)
         
         if args.save_face:
             for m, (ef, of) in enumerate(zip(enhanced_faces, orig_faces)):
                 of = cv2.resize(of, ef.shape[:2])
-                cv2.imwrite(os.path.join(args.outdir, '.'.join(filename.split('.')[:-1])+'_face%02d'%m+args.ext), np.hstack((of, ef)))
+                
         
         if n%10==0: print(n, filename)
